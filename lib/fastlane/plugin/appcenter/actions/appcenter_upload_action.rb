@@ -41,7 +41,7 @@ module Fastlane
         connection = self.connection
 
         response = connection.post do |req|
-          req.url("/v0.1/apps/orgs/#{owner_name}/#{app_name}/release_uploads")
+          req.url("/v0.1/apps/#{owner_name}/#{app_name}/release_uploads")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {}
