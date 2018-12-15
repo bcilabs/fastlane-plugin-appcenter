@@ -223,6 +223,7 @@ module Fastlane
       def self.add_to_group(api_token, release_url, group_name, release_notes = '')
         connection = self.connection
 
+        UI.message("Distribute to group #{group_name}..., with release url #{release_url}")
         response = connection.patch do |req|
           req.url("/#{release_url}")
           req.headers['X-API-Token'] = api_token
@@ -382,6 +383,7 @@ module Fastlane
           UI.message("Uploading release binary...")
           uploaded = self.upload_build(api_token, owner_name, app_name, file, upload_id, upload_url)
 
+          UI.message("uploaded!!! #{uploaded}")
           if uploaded
             release_url = uploaded['release_url']
             UI.message("Release committed")
