@@ -222,7 +222,14 @@ module Fastlane
       # add release to distribution group
       def self.add_to_group(api_token, group_name, owner_name, app_name)
         connection = self.connection
-        apps_names = [ "{ \"name\": \"#{app_name}\" }" ]
+        appName = {}
+        appName[:name] = app_name
+
+        apps_names = [ appName ]
+
+        options = {}
+        options[:upload_id] = upload_id
+
 
         UI.message("GROUP ADD THIS!  /v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps AND #{apps_names}")
         response = connection.post do |req|
