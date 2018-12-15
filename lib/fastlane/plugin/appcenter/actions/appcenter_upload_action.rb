@@ -73,7 +73,7 @@ module Fastlane
         connection = self.connection
 
         response = connection.post do |req|
-          req.url("/v0.1/apps/orgs/#{owner_name}/#{app_name}/symbol_uploads")
+          req.url("/v0.1/apps/#{owner_name}/#{app_name}/symbol_uploads")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {
@@ -102,7 +102,7 @@ module Fastlane
         connection = self.connection
 
         response = connection.patch do |req|
-          req.url("/v0.1/apps/orgs/#{owner_name}/#{app_name}/symbol_uploads/#{symbol_upload_id}")
+          req.url("/v0.1/apps/#{owner_name}/#{app_name}/symbol_uploads/#{symbol_upload_id}")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {
@@ -442,7 +442,7 @@ module Fastlane
             platform = "Java"
 
             response = connection.post do |req|
-              req.url("/v0.1/apps")
+              req.url("/v0.1/orgs/#{owner_name}/apps")
               req.headers['X-API-Token'] = api_token
               req.headers['internal-request-source'] = "fastlane"
               req.body = {
