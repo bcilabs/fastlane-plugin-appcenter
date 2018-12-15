@@ -220,17 +220,15 @@ module Fastlane
       end
 
       # add release to distribution group
-      def self.add_to_group(api_token, release_url, group_name, release_notes = '')
+      def self.add_to_group(api_token, group_name, owner_name, app_name)
         connection = self.connection
 
-        UI.message("Distribute to group #{group_name}..., with release url #{release_url}")
         response = connection.patch do |req|
-          req.url("/#{release_url}")
+          req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {
-            "distribution_group_name" => group_name,
-            "release_notes" => release_notes
+            "app_name" => app_name
           }
         end
 
@@ -389,7 +387,7 @@ module Fastlane
             UI.message("Release committed")
             groups = group.split(',')
             groups.each do |group_name|
-              self.add_to_group(api_token, release_url, group_name, release_notes)
+              self.add_to_group(api_token, group_name, owner_name, app_name)
             end
             destinations = destination.split(',')
             destinations.each do |destination_name|
