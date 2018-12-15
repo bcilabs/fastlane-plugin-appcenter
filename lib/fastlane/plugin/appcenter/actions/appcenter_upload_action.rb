@@ -178,7 +178,7 @@ module Fastlane
         connection = self.connection
 
         response = connection.patch do |req|
-          req.url("/v0.1/apps/orgs/#{owner_name}/#{app_name}/release_uploads/#{upload_id}")
+          req.url("/v0.1/apps/#{owner_name}/#{app_name}/release_uploads/#{upload_id}")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {
@@ -438,8 +438,8 @@ module Fastlane
           if Helper.test? || UI.confirm("App with name #{app_name} not found, create one?")
             connection = self.connection
 
-            os = Helper.test? ? "Android" : UI.select("Select OS", ["Android", "iOS"])
-            platform = Helper.test? ? "Java" : UI.select("Select Platform", platforms[os])
+            os = "Android"
+            platform = "Java"
 
             response = connection.post do |req|
               req.url("/v0.1/apps")
