@@ -220,8 +220,8 @@ module Fastlane
 
       # returns true if app exists, false in case of 404 and error otherwise
       def self.get_distribution_group_app(api_token, owner_name, app_name)
+        UI.message("get distribitution group: #{owner_name}, #{app_name}")
         connection = self.connection
-        
         response = connection.get do |req|
           req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
           req.headers['X-API-Token'] = api_token
@@ -243,6 +243,7 @@ module Fastlane
 
       # add release to distribution group
       def self.add_to_distribution_group(api_token, group_name, owner_name, app_name)
+        UI.message("add distribitution group: #{owner_name}, #{app_name}, #{group_name}")
         connection = self.connection
         appName = {}
         appName[:name] = app_name
@@ -273,6 +274,7 @@ module Fastlane
 
       # add release to distribution group
       def self.add_to_group(api_token, release_url, group_name, release_notes = '', owner_name, app_name)
+        UI.message("ADD to group: #{release_url}, #{group_name}, #{owner_name}, #{app_name}")
         if !self.get_distribution_group_app(api_token, owner_name, app_name)
           self.add_to_distribution_group(api_token, group_name, owner, app_name)
         end
