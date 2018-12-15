@@ -225,7 +225,7 @@ module Fastlane
 
         UI.message("GROUP ADD THIS!  /v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
 
-        response = connection.patch do |req|
+        response = connection.post do |req|
           req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
