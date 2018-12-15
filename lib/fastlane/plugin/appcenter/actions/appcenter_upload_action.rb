@@ -227,10 +227,6 @@ module Fastlane
 
         apps_names = [ appName ]
 
-        options = {}
-        options[:upload_id] = upload_id
-
-
         UI.message("GROUP ADD THIS!  /v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps AND #{apps_names}")
         response = connection.post do |req|
           req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
