@@ -399,9 +399,9 @@ module Fastlane
       # returns true if app exists, false in case of 404 and error otherwise
       def self.get_app(api_token, owner_name, app_name)
         connection = self.connection
-
+        
         response = connection.get do |req|
-          req.url("/v0.1/apps/orgs/#{owner_name}/#{app_name}")
+          req.url("/v0.1/apps/#{owner_name}/#{app_name}")
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
         end
@@ -430,6 +430,7 @@ module Fastlane
           "iOS" => ['Objective-C-Swift', 'React-Native', 'Xamarin']
         }
 
+        UI.message("App with name #{app_name} and owner #{owner_name}")
         if self.get_app(api_token, owner_name, app_name)
           true
         else
