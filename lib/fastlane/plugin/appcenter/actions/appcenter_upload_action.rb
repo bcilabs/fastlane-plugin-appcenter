@@ -40,6 +40,7 @@ module Fastlane
       def self.create_release_upload(api_token, owner_name, app_name)
         connection = self.connection
 
+        UI.message("create_release_upload with appName #{app_name} and owner #{owner_name}")
         response = connection.post do |req|
           req.url("/v0.1/apps/#{owner_name}/#{app_name}/release_uploads")
           req.headers['X-API-Token'] = api_token
