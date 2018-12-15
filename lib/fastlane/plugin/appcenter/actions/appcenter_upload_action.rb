@@ -223,6 +223,8 @@ module Fastlane
       def self.add_to_group(api_token, group_name, owner_name, app_name)
         connection = self.connection
 
+        UI.message("GROUP ADD THIS!  /v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
+
         response = connection.patch do |req|
           req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
           req.headers['X-API-Token'] = api_token
