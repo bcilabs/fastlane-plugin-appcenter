@@ -230,7 +230,7 @@ module Fastlane
           req.headers['X-API-Token'] = api_token
           req.headers['internal-request-source'] = "fastlane"
           req.body = {
-            "apps" => apps
+            "apps" => app_name
           }
         end
 
