@@ -236,7 +236,9 @@ module Fastlane
             UI.message("empty array")
             false
           else
-            app_founded = response.body.select { |app| app.name == app_name }
+            app_founded = response.body.select { |app| 
+              UI.message(app)
+              app.name == app_name }
             UI.message("appFounded #{app_founded}")
             app_founded.size > 0
           end
@@ -467,7 +469,7 @@ module Fastlane
       # returns true if app exists, false in case of 404 and error otherwise
       def self.get_app(api_token, owner_name, app_name)
         connection = self.connection
-        
+
         response = connection.get do |req|
           req.url("/v0.1/apps/#{owner_name}/#{app_name}")
           req.headers['X-API-Token'] = api_token
@@ -505,8 +507,8 @@ module Fastlane
           if Helper.test? || UI.confirm("App with name #{app_name} not found, create one?")
             connection = self.connection
 
-            os = "Android"
-            platform = "Java"
+            os = Helper.test? ? "Android" : UI.select("Select OS", ["Android", "iOS"])
+            platform = Helper.test? ? "Java" : UI.select("Select Platform", platforms[os])
 
             response = connection.post do |req|
               req.url("/v0.1/orgs/#{owner_name}/apps")
