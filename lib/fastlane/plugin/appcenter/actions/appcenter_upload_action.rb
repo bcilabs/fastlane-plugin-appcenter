@@ -281,7 +281,7 @@ module Fastlane
       def self.add_to_group(api_token, release_url, group_name, release_notes = '', owner_name, app_name)
         UI.message("ADD to group: #{release_url}, #{group_name}, #{owner_name}, #{app_name}")
         unless self.get_distribution_group_app(api_token, owner_name, app_name, group_name)
-          self.add_to_distribution_group(api_token, group_name, owner, app_name)
+          self.add_to_distribution_group(api_token, group_name, owner_name, app_name)
         end
         
         UI.message("ADD to group 2: #{release_url}, #{group_name}, #{owner_name}, #{app_name}")
