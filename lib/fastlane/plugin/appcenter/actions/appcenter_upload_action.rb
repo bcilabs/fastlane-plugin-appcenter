@@ -228,10 +228,9 @@ module Fastlane
           req.headers['internal-request-source'] = "fastlane"
         end
 
-        UI.message("getAnswer #{response}")
+        UI.message("getAnswer #{response.body}")
         case response.status
         when 200...300
-          UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
           true
         when 404
           UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
