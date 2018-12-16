@@ -220,7 +220,7 @@ module Fastlane
 
       # returns true if app exists, false in case of 404 and error otherwise
       def self.get_distribution_group_app(api_token, owner_name, app_name, group_name)
-        UI.message("get distribitution group: #{owner_name}, #{app_name}")
+        UI.message("get distribitution group: #{owner_name}, #{app_name}, #{group_name}")
         connection = self.connection
         response = connection.get do |req|
           req.url("/v0.1/orgs/#{owner_name}/distribution_groups/#{group_name}/apps")
@@ -228,6 +228,7 @@ module Fastlane
           req.headers['internal-request-source'] = "fastlane"
         end
 
+        UI.message("getAnswer #{response}")
         case response.status
         when 200...300
           UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
