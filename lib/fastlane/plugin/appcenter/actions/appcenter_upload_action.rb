@@ -231,6 +231,7 @@ module Fastlane
         UI.message("getAnswer #{response.body}")
         case response.status
         when 200...300
+          UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
           if response.body.size == 0
             UI.message("empty array")
             false
@@ -240,8 +241,10 @@ module Fastlane
             app_founded.size > 0
           end
         when 404
+          UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
           false
         else
+          UI.error("Error fetching information about release #{response.status}: #{response.body}")
           false
         end
       end
