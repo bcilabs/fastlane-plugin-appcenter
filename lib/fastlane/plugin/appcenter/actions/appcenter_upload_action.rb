@@ -236,9 +236,7 @@ module Fastlane
             UI.message("empty array")
             false
           else
-            app_founded = response.body.select { |app| 
-              UI.message(app)
-              app.name == app_name }
+            app_founded = response.body.select { |app| app[:name] == app_name }
             UI.message("appFounded #{app_founded}")
             app_founded.size > 0
           end
