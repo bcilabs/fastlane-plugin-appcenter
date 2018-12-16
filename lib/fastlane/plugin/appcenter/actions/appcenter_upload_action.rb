@@ -233,7 +233,7 @@ module Fastlane
         when 200...300
           if response.body.size == 0
             UI.message("empty array")
-            true
+            false
           else
             app_founded = response.body.select { |app| app.name == app_name }
             UI.message("appFounded #{app_founded}")
