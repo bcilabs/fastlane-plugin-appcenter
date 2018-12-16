@@ -240,10 +240,8 @@ module Fastlane
             app_founded.size > 0
           end
         when 404
-          UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
           false
         else
-          UI.error("Error #{response.status}: #{response.body}")
           false
         end
       end
@@ -282,10 +280,11 @@ module Fastlane
       # add release to distribution group
       def self.add_to_group(api_token, release_url, group_name, release_notes = '', owner_name, app_name)
         UI.message("ADD to group: #{release_url}, #{group_name}, #{owner_name}, #{app_name}")
-        if !self.get_distribution_group_app(api_token, owner_name, app_name, group_name)
+        unless self.get_distribution_group_app(api_token, owner_name, app_name, group_name)
           self.add_to_distribution_group(api_token, group_name, owner, app_name)
         end
         
+        UI.message("ADD to group 2: #{release_url}, #{group_name}, #{owner_name}, #{app_name}")
         connection = self.connection
         response = connection.patch do |req|
           req.url("/#{release_url}")
