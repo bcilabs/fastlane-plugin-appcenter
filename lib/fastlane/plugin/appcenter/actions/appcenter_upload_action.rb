@@ -231,7 +231,14 @@ module Fastlane
         UI.message("getAnswer #{response.body}")
         case response.status
         when 200...300
-          true
+          if response.body.size == 0
+            UI.message("empty array")
+            true
+          else
+            app_founded = response.body.select { |app| app.name == app_name }
+            UI.message("appFounded #{app_founded}")
+            app_founded.size > 0
+          end
         when 404
           UI.message("DEBUG: #{JSON.pretty_generate(response.body)}\n") if ENV['DEBUG']
           false
