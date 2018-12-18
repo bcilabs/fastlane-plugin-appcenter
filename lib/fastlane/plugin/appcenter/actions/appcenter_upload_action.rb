@@ -543,8 +543,7 @@ module Fastlane
 
         # if app found or successfully created
         if self.get_or_create_app(params)
-          self.run_release_upload(params) unless upload_dsym_only
-          self.run_dsym_upload(params)
+          self.run_release_upload(params)
         end
 
         return values if Helper.test?
