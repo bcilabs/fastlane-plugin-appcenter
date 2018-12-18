@@ -539,8 +539,7 @@ module Fastlane
 
       def self.run(params)
         values = params.values
-        upload_dsym_only = params[:upload_dsym_only]
-
+        
         # if app found or successfully created
         if self.get_or_create_app(params)
           self.run_release_upload(params)
