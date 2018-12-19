@@ -540,7 +540,7 @@ module Fastlane
       def self.run(params)
         values = params.values
         # if app found or successfully created
-        if self.get_o r_create_app(params)
+        if self.get_or_create_app(params)
           self.run_release_upload(params)
         end
 
