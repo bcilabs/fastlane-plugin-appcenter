@@ -517,19 +517,16 @@ module Fastlane
               "os" => os,
               "platform" => platform
             }
+          end
 
-            case response.status
-            when 200...300
-              created = response.body
-              UI.message("DEBUG: #{JSON.pretty_generate(created)}") if ENV['DEBUG']
-              UI.success("Created #{os}/#{platform} app with name \"#{created['name']}\"")
-              true
-            else
-              UI.error("Error creating app #{response.status}: #{response.body}")
-              false
-            end
+          case response.status
+          when 200...300
+            created = response.body
+            UI.message("DEBUG: #{JSON.pretty_generate(created)}") if ENV['DEBUG']
+            UI.success("Created #{os}/#{platform} app with name \"#{created['name']}\"")
+            true
           else
-            UI.error("Lane aborted")
+            UI.error("Error creating app #{response.status}: #{response.body}")
             false
           end
         end
