@@ -502,23 +502,21 @@ module Fastlane
         if self.get_app(api_token, owner_name, app_name)
           true
         else
-          if Helper.test?
-            connection = self.connection
+          connection = self.connection
 
-            os = ENV['PLATFORM_NAME']
-            platform = ENV['LANGUAGE_NAME']
+          os = ENV['PLATFORM_NAME']
+          platform = ENV['LANGUAGE_NAME']
 
-            response = connection.post do |req|
-              req.url("/v0.1/orgs/#{owner_name}/apps")
-              req.headers['X-API-Token'] = api_token
-              req.headers['internal-request-source'] = "fastlane"
-              req.body = {
-                "display_name" => app_name,
-                "name" => app_name,
-                "os" => os,
-                "platform" => platform
-              }
-            end
+          response = connection.post do |req|
+            req.url("/v0.1/orgs/#{owner_name}/apps")
+            req.headers['X-API-Token'] = api_token
+            req.headers['internal-request-source'] = "fastlane"
+            req.body = {
+              "display_name" => app_name,
+              "name" => app_name,
+              "os" => os,
+              "platform" => platform
+            }
 
             case response.status
             when 200...300
