@@ -502,7 +502,7 @@ module Fastlane
         if self.get_app(api_token, owner_name, app_name)
           true
         else
-          if Helper.test? || UI.confirm("App with name #{app_name} not found, create one?")
+          if Helper.test?
             connection = self.connection
 
             os = ENV['PLATFORM_NAME']
