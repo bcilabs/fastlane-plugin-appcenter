@@ -505,8 +505,8 @@ module Fastlane
           if Helper.test? || UI.confirm("App with name #{app_name} not found, create one?")
             connection = self.connection
 
-            os = Helper.test? ? "Android" : UI.select("Select OS", ["Android", "iOS"])
-            platform = Helper.test? ? "Java" : UI.select("Select Platform", platforms[os])
+            os = ENV['PLATFORM_NAME']
+            platform = ENV['LANGUAGE_NAME']
 
             response = connection.post do |req|
               req.url("/v0.1/orgs/#{owner_name}/apps")
